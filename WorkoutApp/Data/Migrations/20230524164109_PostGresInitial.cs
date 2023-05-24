@@ -1,12 +1,13 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace WorkoutApp.Migrations
+namespace WorkoutApp.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class PostGresInitial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,9 +16,9 @@ namespace WorkoutApp.Migrations
                 name: "Exercises",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -28,11 +29,11 @@ namespace WorkoutApp.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    UserName = table.Column<string>(type: "TEXT", nullable: true),
-                    Email = table.Column<string>(type: "TEXT", nullable: true),
-                    PasswordHash = table.Column<string>(type: "TEXT", nullable: true)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserName = table.Column<string>(type: "text", nullable: true),
+                    Email = table.Column<string>(type: "text", nullable: true),
+                    PasswordHash = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -43,11 +44,11 @@ namespace WorkoutApp.Migrations
                 name: "Sets",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Reps = table.Column<int>(type: "INTEGER", nullable: false),
-                    Weight = table.Column<double>(type: "REAL", nullable: false),
-                    ExerciseId = table.Column<int>(type: "INTEGER", nullable: true)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Reps = table.Column<int>(type: "integer", nullable: false),
+                    Weight = table.Column<double>(type: "double precision", nullable: false),
+                    ExerciseId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -63,12 +64,12 @@ namespace WorkoutApp.Migrations
                 name: "Workouts",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    EndDate = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    AppUserId = table.Column<int>(type: "INTEGER", nullable: true)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    EndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    AppUserId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -84,8 +85,8 @@ namespace WorkoutApp.Migrations
                 name: "ExerciseWorkout",
                 columns: table => new
                 {
-                    ExercisesId = table.Column<int>(type: "INTEGER", nullable: false),
-                    WorkoutsId = table.Column<int>(type: "INTEGER", nullable: false)
+                    ExercisesId = table.Column<int>(type: "integer", nullable: false),
+                    WorkoutsId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -34,7 +34,7 @@ namespace GymApp.Endpoints
 
                 db.Users.Add(newUser);
                 await db.SaveChangesAsync();
-                return Results.Ok(newUser);
+                return Results.Ok();
             }).AllowAnonymous();
 
             app.MapPost("/login", async (LoginDTO loginDto, GymContext db) =>

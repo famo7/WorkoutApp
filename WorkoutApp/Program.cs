@@ -57,7 +57,7 @@ builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =
 
 builder.Services.AddDbContext<GymContext>(opt =>
 {
-    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
+    opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
