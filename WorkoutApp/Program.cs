@@ -1,3 +1,6 @@
+using System.Security.Claims;
+using System.Text;
+using System.Text.Json.Serialization;
 using FluentValidation;
 using GymApp.Endpoints;
 using GymApp.Models;
@@ -6,9 +9,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Security.Claims;
-using System.Text;
-using System.Text.Json.Serialization;
 using WorkoutApp;
 using WorkoutApp.Endpoints;
 using WorkoutApp.Repository;
@@ -67,7 +67,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         {
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(
-                 builder.Configuration.GetSection("jwt:Token").Value!
+                 builder.Configuration.GetSection("Token").Value!
             )),
             ValidateIssuer = false,
             ValidateAudience = false
