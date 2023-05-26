@@ -139,6 +139,7 @@ app.Use(async (context, next) =>
     await next();
 });
 
+
 app.MapAccountEndpoints();
 app.MapWorkoutEndpoints();
 app.MapExerciseEndpoints();
