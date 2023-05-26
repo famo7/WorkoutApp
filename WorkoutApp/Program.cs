@@ -121,10 +121,10 @@ builder.Services.AddAutoMapper(typeof(MappingConfig));
 var app = builder.Build();
 app.UseCors(options => options.AllowAnyOrigin());
 
-app.UseSwagger();
 
 if (app.Environment.IsDevelopment())
 {
+    app.UseSwagger();
     app.UseSwaggerUI();
 }
 
