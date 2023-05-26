@@ -1,7 +1,7 @@
 name: docker-push
 
 on:
-  workflow_displatch:
+  workflow-displatch:
   # push:
   #   branches:
   #     - 'main'
