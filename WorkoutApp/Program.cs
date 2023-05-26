@@ -121,11 +121,6 @@ var app = builder.Build();
 app.UseCors(options => options.AllowAnyOrigin());
 
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
 
 app.UseAuthentication();
 app.UseAuthorization();
