@@ -1,10 +1,10 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using GymApp.DTO;
 using GymApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 
 namespace GymApp.Endpoints
 {
@@ -62,7 +62,7 @@ namespace GymApp.Endpoints
                 new Claim(ClaimTypes.Name, user.UserName!)
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
-             app.Configuration.GetSection("jwt:Token").Value!
+             app.Configuration.GetSection("TokenKey").Value!
             ));
             var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
             var token = new JwtSecurityToken(
