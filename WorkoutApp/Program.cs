@@ -22,34 +22,34 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddTransient<IWorkoutRepository, WorkoutRepository>();
 builder.Services.AddTransient<IExerciseRepository, ExerciseRepository>();
 
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Title = "My API",
-        Version = "v1"
-    });
-    c.AddSecurityDefinition("bearer", new OpenApiSecurityScheme
-    {
-        In = ParameterLocation.Header,
-        Description = "Please insert JWT with bearer into field",
-        Name = "Authorization",
-        Type = SecuritySchemeType.ApiKey
-    });
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement {
-   {
-     new OpenApiSecurityScheme
-     {
-       Reference = new OpenApiReference
-       {
-         Type = ReferenceType.SecurityScheme,
-         Id = "bearer"
-       }
-      },
-      new string[] { }
-    }
-  });
-});
+// builder.Services.AddSwaggerGen(c =>
+// {
+//     c.SwaggerDoc("v1", new OpenApiInfo
+//     {
+//         Title = "My API",
+//         Version = "v1"
+//     });
+//     c.AddSecurityDefinition("bearer", new OpenApiSecurityScheme
+//     {
+//         In = ParameterLocation.Header,
+//         Description = "Please insert JWT with bearer into field",
+//         Name = "Authorization",
+//         Type = SecuritySchemeType.ApiKey
+//     });
+//     c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+//    {
+//      new OpenApiSecurityScheme
+//      {
+//        Reference = new OpenApiReference
+//        {
+//          Type = ReferenceType.SecurityScheme,
+//          Id = "bearer"
+//        }
+//       },
+//       new string[] { }
+//     }
+//   });
+// });
 var connString = "";
 if (builder.Environment.IsDevelopment())
     connString = builder.Configuration.GetConnectionString("DefaultConnection");
