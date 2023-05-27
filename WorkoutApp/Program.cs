@@ -66,7 +66,7 @@ else
     var pgPass = pgUserPass.Split(":")[1];
     var pgHost = pgHostPort.Split(":")[0];
     var pgPort = pgHostPort.Split(":")[1];
-    var updatedHost = pgHost.Replace("fly.dev", "internal");
+    //var updatedHost = pgHost.Replace("fly.dev", "internal");
 
     connString = $"Server ={"strengthseeker-db.internal"}; Port ={pgPort}; User Id = {pgUser}; Password ={pgPass}; Database ={pgDb};";
 }
