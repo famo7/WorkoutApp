@@ -49,6 +49,7 @@ builder.Services.AddTransient<IExerciseRepository, ExerciseRepository>();
 //     }
 //   });
 // });
+
 var connString = "";
 if (builder.Environment.IsDevelopment())
     connString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -68,7 +69,7 @@ else
     var pgPort = pgHostPort.Split(":")[1];
     var updatedHost = pgHost.Replace("flycast", "internal");
 
-    connString = $"Server ={"strengthseeker-db.internal"}; Port ={pgPort}; User Id = {pgUser}; Password ={pgPass}; Database ={pgDb};";
+    connString = $"Server ={"strengthseeker-db.fly.dev.internal"}; Port ={pgPort}; User Id = {pgUser}; Password ={pgPass}; Database ={pgDb};";
 }
 builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
 {
