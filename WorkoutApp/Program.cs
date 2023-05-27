@@ -68,7 +68,7 @@ else
     var pgPort = pgHostPort.Split(":")[1];
     var updatedHost = pgHost.Replace("fly.dev", "internal");
 
-    connString = $"Server ={"strengthseeker-db.flycast"}; Port ={pgPort}; User Id = {pgUser}; Password ={pgPass}; Database ={pgDb};";
+    connString = $"Server ={"strengthseeker-db.internal"}; Port ={pgPort}; User Id = {pgUser}; Password ={pgPass}; Database ={pgDb};";
 }
 builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
 {
