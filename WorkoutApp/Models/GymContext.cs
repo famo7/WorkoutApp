@@ -15,7 +15,7 @@ namespace GymApp.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            this.Database.EnsureCreated();
         }
     }
 }
