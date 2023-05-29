@@ -52,24 +52,25 @@ builder.Services.AddTransient<IExerciseRepository, ExerciseRepository>();
 //   });
 // });
 var connString = "";
-string connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
 
-Uri uri = new Uri(connectionString);
 
-string server = uri.Host;
-int port = uri.Port;
-string database = uri.AbsolutePath.TrimStart('/');
-string username = uri.UserInfo.Split(':')[0];
-string password = uri.UserInfo.Split(':')[1];
-
-Debug.WriteLine($"Server={server};Port={5432};User Id={username};Password={password};Database={database};");
-connString = $"Server={server};Port={port};User Id={username};Password={password};Database={database};";
 
 if (builder.Environment.IsDevelopment())
     connString = builder.Configuration.GetConnectionString("DefaultConnection");
 else
 {
-    var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+    string connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
+
+    Uri uri = new Uri(connectionString);
+
+    string server = uri.Host;
+    int port = uri.Port;
+    string database = uri.AbsolutePath.TrimStart('/');
+    string username = uri.UserInfo.Split(':')[0];
+    string password = uri.UserInfo.Split(':')[1];
+
+    connString = $"Server={server};Port={port};User Id={username};Password={password};Database={database};";
+
 }
 builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
 {
