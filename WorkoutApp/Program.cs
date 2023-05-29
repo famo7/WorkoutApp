@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -61,7 +62,7 @@ string database = uri.AbsolutePath.TrimStart('/');
 string username = uri.UserInfo.Split(':')[0];
 string password = uri.UserInfo.Split(':')[1];
 
-
+Debug.WriteLine($"Server={server};Port={port};User Id={username};Password={password};Database={database};");
 connString = $"Server={server};Port={port};User Id={username};Password={password};Database={database};";
 
 if (builder.Environment.IsDevelopment())
