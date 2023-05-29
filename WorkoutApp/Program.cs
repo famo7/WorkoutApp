@@ -69,7 +69,7 @@ else
     string username = uri.UserInfo.Split(':')[0];
     string password = uri.UserInfo.Split(':')[1];
 
-    connString = $"Server={server};Port={port};User Id={username};Password={password};Database={database};";
+    connString = $"Server={server};Port={5432};User Id={username};Password={password};Database={database};";
 
 }
 builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
