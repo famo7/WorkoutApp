@@ -15,10 +15,6 @@ namespace GymApp.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var user = new AppUser { Id = 1, Email = "test@gmail.com", UserName = "test", PasswordHash = BCrypt.Net.BCrypt.HashPassword("123") };
-
-            modelBuilder.Entity<AppUser>().HasData(user);
-
         }
     }
 }
