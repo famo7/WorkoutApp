@@ -50,6 +50,8 @@ builder.Services.AddTransient<IExerciseRepository, ExerciseRepository>();
 //   });
 // });
 var connString = "";
+connString = builder.Configuration.GetConnectionString("DefaultConnection");
+
 if (builder.Environment.IsDevelopment())
     connString = builder.Configuration.GetConnectionString("DefaultConnection");
 else
