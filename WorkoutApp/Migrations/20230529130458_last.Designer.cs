@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace WorkoutApp.Migrations
 {
     [DbContext(typeof(GymContext))]
-    [Migration("20230528203629_InitialCreate10")]
-    partial class InitialCreate10
+    [Migration("20230529130458_last")]
+    partial class last
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,6 +60,15 @@ namespace WorkoutApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "test@gmail.com",
+                            PasswordHash = "$2a$11$4PF1nJ6x31nDyJVIb7okeOBtJAprv984a0w6RZx65sN.N4IttNUh2",
+                            UserName = "test"
+                        });
                 });
 
             modelBuilder.Entity("GymApp.Models.Exercise", b =>
