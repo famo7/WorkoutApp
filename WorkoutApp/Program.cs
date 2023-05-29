@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Npgsql;
 using WorkoutApp;
 using WorkoutApp.Endpoints;
 using WorkoutApp.Repository;
@@ -55,22 +56,16 @@ if (builder.Environment.IsDevelopment())
     connString = builder.Configuration.GetConnectionString("DefaultConnection");
 else
 {
-    // Use connection string provided at runtime by Heroku.
-    var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+    string connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
+    var b = new NpgsqlConnectionStringBuilder(connectionString);
 
-    // Parse connection URL to connection string for Npgsql
-    connUrl = connUrl.Replace("postgres://", string.Empty);
-    var pgUserPass = connUrl.Split("@")[0];
-    var pgHostPortDb = connUrl.Split("@")[1];
-    var pgHostPort = pgHostPortDb.Split("/")[0];
-    var pgDb = pgHostPortDb.Split("/")[1];
-    var pgUser = pgUserPass.Split(":")[0];
-    var pgPass = pgUserPass.Split(":")[1];
-    var pgHost = pgHostPort.Split(":")[0];
-    var pgPort = pgHostPort.Split(":")[1];
+    string server = b.Host;
+    int port = b.Port;
+    string database = b.Database;
+    string username = b.Username;
+    string password = b.Password;
 
-
-    connString = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};";
+    connString = $"Server={server};Port={port};User Id={username};Password={password};Database={database};";
 }
 builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
 {
