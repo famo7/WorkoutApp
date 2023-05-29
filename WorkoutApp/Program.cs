@@ -52,13 +52,15 @@ builder.Services.AddTransient<IExerciseRepository, ExerciseRepository>();
 // });
 var connString = "";
 string connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
-var b = new NpgsqlConnectionStringBuilder(connectionString);
 
-string server = b.Host;
-int port = b.Port;
-string database = b.Database;
-string username = b.Username;
-string password = b.Password;
+Uri uri = new Uri(connectionString);
+
+string server = uri.Host;
+int port = uri.Port;
+string database = uri.AbsolutePath.TrimStart('/');
+string username = uri.UserInfo.Split(':')[0];
+string password = uri.UserInfo.Split(':')[1];
+
 
 connString = $"Server={server};Port={port};User Id={username};Password={password};Database={database};";
 
