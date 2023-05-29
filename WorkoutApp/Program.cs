@@ -62,7 +62,18 @@ string database = uri.AbsolutePath.TrimStart('/');
 string username = uri.UserInfo.Split(':')[0];
 string password = uri.UserInfo.Split(':')[1];
 
-Debug.WriteLine($"Server={server};Port={port};User Id={username};Password={password};Database={database};");
+// Create the updated connection string with the port number
+NpgsqlConnectionStringBuilder b = new NpgsqlConnectionStringBuilder
+{
+    Host = server,
+    Port = port,
+    Database = database,
+    Username = username,
+    Password = password
+};
+
+connString = b.ToString();
+
 connString = $"Server={server};Port={port};User Id={username};Password={password};Database={database};";
 
 if (builder.Environment.IsDevelopment())
