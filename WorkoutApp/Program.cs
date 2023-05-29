@@ -51,21 +51,22 @@ builder.Services.AddTransient<IExerciseRepository, ExerciseRepository>();
 //   });
 // });
 var connString = "";
+string connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
+var b = new NpgsqlConnectionStringBuilder(connectionString);
+
+string server = b.Host;
+int port = b.Port;
+string database = b.Database;
+string username = b.Username;
+string password = b.Password;
+
+connString = $"Server={server};Port={port};User Id={username};Password={password};Database={database};";
 
 if (builder.Environment.IsDevelopment())
     connString = builder.Configuration.GetConnectionString("DefaultConnection");
 else
 {
-    string connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
-    var b = new NpgsqlConnectionStringBuilder(connectionString);
-
-    string server = b.Host;
-    int port = b.Port;
-    string database = b.Database;
-    string username = b.Username;
-    string password = b.Password;
-
-    connString = $"Server={server};Port={port};User Id={username};Password={password};Database={database};";
+    var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
 }
 builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
 {
